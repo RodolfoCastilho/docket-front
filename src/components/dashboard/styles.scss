@@ -7,11 +7,12 @@
 .content {
   display: flex;
   background: #f3f3f3;
-  height: 100vh;
+  height: 100%;
 }
 
 header {
   position: fixed;
+  z-index: 1;
   width: 100%;
   img {
     width: 100%;
@@ -29,7 +30,6 @@ main {
   }
 
   .first-container {
-    position: fixed;
     height: 193px;
     width: 96%;
     margin-right: 30px;
@@ -45,51 +45,165 @@ main {
     }
 
     .status {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #EBF0F5;
-        font-size: 14px;
-        padding: 4px;
-        border-radius: 2px;
-        
-        .circle {
-            margin-right: 10px;
-          display: inline-block;
-          background: #ffaf3e;
-          border-radius: 50%;
-          width: 8px;
-          height: 8px;
-        }
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ebf0f5;
+      font-size: 14px;
+      padding: 4px;
+      border-radius: 2px;
+
+      .circle {
+        margin-right: 10px;
+        display: inline-block;
+        background: #ffaf3e;
+        border-radius: 50%;
+        width: 8px;
+        height: 8px;
+      }
     }
 
     .observation-text {
-        margin-top: 25px;
-        font-size: 14px;
+      margin-top: 25px;
+      font-size: 14px;
     }
 
     .first-container-footer {
-        display: flex;
-        align-items: center;
-        margin-top: 20px;
-        font-size: 14px;
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+      font-size: 14px;
 
-        p + p {
-            margin-left: 19px;
-        }
+      p + p {
+        margin-left: 19px;
+      }
+    }
+  }
+
+  .form-container {
+    margin-top: 16px;
+    margin-bottom: 24px;
+    width: 530px;
+    height: 780px;
+    padding: 24px;
+    background: #fff;
+    box-shadow: 0px 1px 2px #2e2d2c66;
+    border-radius: 4px;
+    opacity: 1;
+
+    ::placeholder {
+      color: #ABABAB;
+    }
+
+    form {
+      margin-top: 18px;
+    }
+
+    .divider span {
+      border-top: 1px solid black;
+    }
+
+    input {
+      height: 40px;
+      width: 482px;
+      padding: 8px;
+      border: 1px solid #ABABAB;
+    }
+
+    select {
+      height: 40px;
+      width: 286px;
+      padding: 8px;
+      border: 1px solid #ABABAB;
+    }
+
+    label {
+      margin-top: 10px;
+    }
+
+    .label-document {
+      margin-top: 10px;
+      display: flex;
+    }
+
+    .box-name {
+      margin-top: 10px;
+    }
+
+
+    h4 {
+      margin-top: 28px;
+      margin-bottom: 28px;
+    }
+
+    .box-zipcode {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        margin-bottom: 10px;
+      }
+
+      .input-zipcode {
+        width: 176px;
+      }
+    }
+
+    .box-street {
+      display: flex;
+      flex-direction: column;
+      margin-right: 24px;
+      .input-street {
+        width: 250px;
+      }
+    }
+
+    .box-number {
+      display: flex;
+      flex-direction: column;
+      .input-number {
+        width: 130px;
+      }
+    }
+
+    .box-city {
+      display: flex;
+      flex-direction: column;
+      margin-right: 24px;
+
+      .input-city {
+        width: 250px;
+      }
+    }
+
+    .box-state {
+      display: flex;
+      flex-direction: column;
+      .input-state {
+        width: 130px;
+      }
+    }
+
+    button {
+      margin-top: 24px;
+      height: 32px;
+      width: 146px;
+      background: #3570B2;
+      border-radius: 16px;
+      border: none;
     }
   }
 }
 
 footer {
   display: flex;
+  position: fixed;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   height: 56px;
   background: transparent linear-gradient(90deg, #5a5789 0%, #2d2c45 100%) 0% 0%
     no-repeat padding-box;
-  position: absolute;
   bottom: 0;
   width: 100%;
 

@@ -1,9 +1,12 @@
 import { Dashboard } from "./components/dashboard";
+import SnackbarProvider from "react-simple-snackbar";
 
 function App() {
   return (
     <div className="App">
-      <Dashboard />
+      <SnackbarProvider>
+        <Dashboard />
+      </SnackbarProvider>
     </div>
   );
 }
