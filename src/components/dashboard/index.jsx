@@ -2,8 +2,8 @@ import { Formik } from "formik";
 import { useEffect, useRef, useState } from "react";
 import { findCEP } from "../../services/api";
 import { useSnackbar } from "react-simple-snackbar";
-import * as Yup from "yup";
 import { IMaskInput } from "react-imask";
+import * as Yup from "yup";
 
 import "./styles.scss";
 import headerImg from "../../assets/header-img.png";
@@ -11,8 +11,8 @@ import axios from "axios";
 import { Ticket } from "../ticket";
 
 export function Dashboard() {
-  const options = {
-    position: "center",
+  const errorOpt = {
+    position: "top-center",
     style: {
       backgroundColor: "red",
       color: "white",
@@ -21,7 +21,25 @@ export function Dashboard() {
     },
   };
 
-  const [openSnackbar] = useSnackbar(options);
+  const sucessOpt = {
+    position: "top-center",
+    style: {
+      backgroundColor: "green",
+      color: "white",
+      fontSize: "12px",
+      textAlign: "center",
+    },
+  }; 
+
+  const FormSchema = Yup.object().shape({
+    documentName: Yup.string().required("Obrigatório"),
+    type: Yup.string().required("Obrigatório"),
+    zipCode: Yup.number().required("Obrigatório"),
+    number: Yup.number().required("Obrigatório"),
+  });
+
+  const [openErrorSnackbar] = useSnackbar(errorOpt);
+  const [openSuccessSnackbar] = useSnackbar(sucessOpt);
 
   const [documents, setDocuments] = useState([]);
   const [docCounter, setDocCounter] = useState(0);
@@ -29,10 +47,11 @@ export function Dashboard() {
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFindZipCode = async (e) => {
     if (e.target.value.length <= 7 || e.target.value.length > 8) {
-      openSnackbar("Digite um CEP válido!");
+      openErrorSnackbar("Digite um CEP válido!");
     } else {
       const data = await findCEP(e.target.value);
       setStreet(data.logradouro);
@@ -41,17 +60,18 @@ export function Dashboard() {
     }
   };
 
-  useEffect(() => {
-    const getDocuments = async () => {
-      const arr = [];
-      const res = await axios.get("http://localhost:3000/documents");
-      const ids = res.data.map((obj) => obj.id);
-      const lastId = ids.slice(-1);
-      setDocuments(arr);
-      setLastId(lastId);
-    };
+  const fetchDocuments = async () => {
+    const res = await axios.get("http://localhost:3000/documents");
+    return res.data;
+  };
 
-    getDocuments().catch(console.error);
+  useEffect(() => {
+    fetchDocuments().then(function (values) {
+      let lastId = values.map((obj) => obj.id).slice(-1);
+      setDocCounter(values.length);
+      setLastId(lastId);
+      setDocuments(values);
+    });
   }, []);
 
   return (
@@ -103,24 +123,35 @@ export function Dashboard() {
                     documentValue: "",
                     name: "",
                     zipCode: "",
-                    street: "",
                     number: "",
-                    city: "",
-                    state: "",
                   }}
                   onSubmit={(values) => {
                     const data = {
                       id: lastId[0] + 1,
                       createdAt: new Date(),
+                      street,
+                      city,
+                      state,
                       ...values,
                     };
+                    setIsLoading(true);
+                   try {
                     axios
-                      .post("http://localhost:3000/documents", data)
-                      .then(function () {
-                        setDocCounter(docCounter + 1);
+                    .post("http://localhost:3000/documents", data)
+                    .then(function () {
+                      setDocCounter(docCounter + 1);
+                      setTimeout(() => {
+                        setIsLoading(false);
                         setDocuments(...documents, data);
-                      });
+                        window.location.reload();
+                      }, 1000);
+                      openSuccessSnackbar("Documento criado com sucesso.")
+                    })
+                   } catch (e) {
+                    openErrorSnackbar("Houve um erro ao criar o documento!")
+                   }
                   }}
+                  validationSchema={FormSchema}
                 >
                   {({
                     values,
@@ -130,7 +161,6 @@ export function Dashboard() {
                     handleBlur,
                     handleSubmit,
                     isSubmitting,
-                    submitForm,
                   }) => (
                     <form onSubmit={handleSubmit}>
                       <label htmlFor="documentName">Nome do documento:</label>
@@ -142,6 +172,9 @@ export function Dashboard() {
                         onBlur={handleBlur}
                         value={values.documentName}
                       />
+                      {errors.documentName && touched.documentName ? (
+                        <div style={{color: "red"}}>{errors.documentName}</div>
+                      ) : null}
                       <label style={{ display: "flex" }} htmlFor="type">
                         Tipo do Documento:
                       </label>
@@ -183,7 +216,9 @@ export function Dashboard() {
                           value={values.name}
                         />
                       </div>
-
+                      {errors.name && touched.name ? (
+                        <div style={{color: "red"}}>{errors.name}</div>
+                      ) : null}
                       <h4>Dados do cartório</h4>
                       <div className="box-zipcode">
                         <label htmlFor="zipCode">CEP:</label>
@@ -197,7 +232,9 @@ export function Dashboard() {
                           value={values.zipCode}
                         />
                       </div>
-
+                      {errors.name && touched.name ? (
+                        <div style={{color: "red"}}>{errors.name}</div>
+                      ) : null}
                       <div style={{ display: "flex" }}>
                         <div className="box-street">
                           <label htmlFor="street">Rua:</label>
@@ -223,6 +260,9 @@ export function Dashboard() {
                             onBlur={handleBlur}
                             value={values.number}
                           />
+                          {errors.number && touched.number ? (
+                            <div style={{color: "red"}}>{errors.number}</div>
+                          ) : null}
                         </div>
                       </div>
                       <div style={{ display: "flex" }}>
@@ -240,7 +280,7 @@ export function Dashboard() {
                           />
                         </div>
                         <div className="box-state">
-                          <label htmlFor="documentName">UF:</label>
+                          <label htmlFor="state">UF:</label>
                           <input
                             type="text"
                             placeholder="Digite aqui"
@@ -266,11 +306,11 @@ export function Dashboard() {
                   : `${docCounter} documentos solicitados`}
               </h2>
               <div className="tickets">
-                {typeof documents === Object ? (
-                  <Ticket data={documents} />
-                ) : (
-                  documents.map((ticket) => <Ticket data={ticket} />)
-                )}
+                {isLoading ? (
+                  <p>Carregando...</p>
+                ) : Array.isArray(documents) ? (
+                  documents.map((obj) => <Ticket data={obj} key={obj.id} />)
+                ) : null}
               </div>
             </div>
           </div>

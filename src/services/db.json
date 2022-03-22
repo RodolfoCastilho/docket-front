@@ -2,42 +2,16 @@
   "documents": [
     {
       "id": 1,
-      "createdAt": "2022-03-22T04:03:16.171Z",
-      "documentName": "Certidão de Nascimento",
-      "type": "person",
-      "documentValue": "354.602.846-84",
+      "createdAt": "2022-03-22T20:04:37.225Z",
+      "street": "Rua Oswaldo Moretto",
+      "city": "Sorocaba",
+      "state": "SP",
+      "documentName": "Registro Geral",
+      "type": "company",
+      "documentValue": "",
       "name": "Henry Silva de Castilho",
       "zipCode": "18078623",
-      "street": "",
-      "number": "170",
-      "city": "",
-      "state": ""
-    },
-    {
-      "id": 2,
-      "createdAt": "2022-03-22T04:03:46.353Z",
-      "documentName": "Certidão de Nascimento",
-      "type": "person",
-      "documentValue": "354.602.846-84",
-      "name": "Henry Silva de Castilho",
-      "zipCode": "18078623",
-      "street": "",
-      "number": "170",
-      "city": "",
-      "state": ""
-    },
-    {
-      "id": 3,
-      "createdAt": "2022-03-22T04:08:54.387Z",
-      "documentName": "Certidão de Nascimento",
-      "type": "person",
-      "documentValue": "354.602.846-84",
-      "name": "Henry Silva de Castilho",
-      "zipCode": "18078623",
-      "street": "",
-      "number": "170",
-      "city": "",
-      "state": ""
+      "number": "170"
     }
   ]
 }

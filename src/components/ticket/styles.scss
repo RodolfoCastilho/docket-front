@@ -4,6 +4,14 @@
     background: #ffffff;
     box-shadow: 0px 1px 2px #2e2d2c66;
     border-radius: 4px;
+    margin-bottom: 10px;
+
+    .delete-button {
+      background: url("../../assets/delete-icon.png") no-repeat;
+      width: 30px;
+      height: 22px;
+      border: none;
+    }
 
     .ticket-header {
       display: flex;
@@ -28,11 +36,11 @@
     hr {
       border: 0;
       border-top: 1px solid #2E2D2C66;
-      margin: 15px auto;
+      margin: 0px auto;
    }
 
     .ticket-footer {
-      margin-top: -6px;
+      margin-top: 6px;
       padding-left: 24px;
     }
   }
