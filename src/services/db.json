@@ -1,43 +1,43 @@
 {
-    "documents": [
-        {
-            "id": 1,
-            "documentName": "Registro Geral",
-            "type": "Física",
-            "name": "Maria Silva",
-            "document": "123.456.478-98",
-            "zipCode": "18078-680",
-            "street": "Rua Milton Rosa",
-            "number": 169,
-            "city": "Sorocaba",
-            "state": "São Paulo",
-            "createdAt": "11 de maio de 2021"
-        },
-        {
-            "id": 2,
-            "documentName": "Certidão de Casamento",
-            "type": "Física",
-            "name": "José das Nuvens",
-            "document": "741.126.555-98",
-            "zipCode": "18078-623",
-            "street": "Rua Oswaldo Rosa",
-            "number": 546,
-            "city": "Taubaté",
-            "state": "São Paulo",
-            "createdAt": "18 de junho de 2021"
-        },
-        {
-            "id": 3,
-            "documentName": "Registro de Empresa",
-            "type": "Jurídica",
-            "name": "Geladinhos Gourmet",
-            "document": "66.461.689/0001-60",
-            "zipCode": "16351-680",
-            "street": "Rua General Carneiro",
-            "number": 3215,
-            "city": "São Paulo",
-            "state": "São Paulo",
-            "createdAt": "11 de dezembro de 2021"
-        }
-    ]
+  "documents": [
+    {
+      "id": 1,
+      "createdAt": "2022-03-22T04:03:16.171Z",
+      "documentName": "Certidão de Nascimento",
+      "type": "person",
+      "documentValue": "354.602.846-84",
+      "name": "Henry Silva de Castilho",
+      "zipCode": "18078623",
+      "street": "",
+      "number": "170",
+      "city": "",
+      "state": ""
+    },
+    {
+      "id": 2,
+      "createdAt": "2022-03-22T04:03:46.353Z",
+      "documentName": "Certidão de Nascimento",
+      "type": "person",
+      "documentValue": "354.602.846-84",
+      "name": "Henry Silva de Castilho",
+      "zipCode": "18078623",
+      "street": "",
+      "number": "170",
+      "city": "",
+      "state": ""
+    },
+    {
+      "id": 3,
+      "createdAt": "2022-03-22T04:08:54.387Z",
+      "documentName": "Certidão de Nascimento",
+      "type": "person",
+      "documentValue": "354.602.846-84",
+      "name": "Henry Silva de Castilho",
+      "zipCode": "18078623",
+      "street": "",
+      "number": "170",
+      "city": "",
+      "state": ""
+    }
+  ]
 }

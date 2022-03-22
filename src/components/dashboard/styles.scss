@@ -81,6 +81,7 @@ main {
   }
 
   .form-container {
+    flex: 1;
     margin-top: 16px;
     margin-bottom: 24px;
     width: 530px;
@@ -92,29 +93,25 @@ main {
     opacity: 1;
 
     ::placeholder {
-      color: #ABABAB;
+      color: #ababab;
     }
 
     form {
       margin-top: 18px;
     }
 
-    .divider span {
-      border-top: 1px solid black;
-    }
-
     input {
       height: 40px;
       width: 482px;
       padding: 8px;
-      border: 1px solid #ABABAB;
+      border: 1px solid #ababab;
     }
 
     select {
       height: 40px;
       width: 286px;
       padding: 8px;
-      border: 1px solid #ABABAB;
+      border: 1px solid #ababab;
     }
 
     label {
@@ -129,7 +126,6 @@ main {
     .box-name {
       margin-top: 10px;
     }
-
 
     h4 {
       margin-top: 28px;
@@ -188,10 +184,20 @@ main {
       margin-top: 24px;
       height: 32px;
       width: 146px;
-      background: #3570B2;
+      background: #3570b2;
       border-radius: 16px;
       border: none;
+      cursor: pointer;
     }
+  }
+
+  .side-by-side {
+    display: flex;
+    width: 50%;
+  }
+
+  .tickets-area {
+    margin-left: 20px;
   }
 }
 
