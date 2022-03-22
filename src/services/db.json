@@ -2,13 +2,13 @@
   "documents": [
     {
       "id": 1,
-      "createdAt": "2022-03-22T20:04:37.225Z",
+      "createdAt": "2022-03-22T20:27:32.295Z",
       "street": "Rua Oswaldo Moretto",
       "city": "Sorocaba",
       "state": "SP",
-      "documentName": "Registro Geral",
-      "type": "company",
-      "documentValue": "",
+      "documentName": "Certidão de Nascimento",
+      "type": "person",
+      "documentValue": "498.432.515-61",
       "name": "Henry Silva de Castilho",
       "zipCode": "18078623",
       "number": "170"

@@ -7,6 +7,7 @@ import * as Yup from "yup";
 
 import "./styles.scss";
 import headerImg from "../../assets/header-img.png";
+import emptyImg from "../../assets/empty.png";
 import axios from "axios";
 import { Ticket } from "../ticket";
 
@@ -29,7 +30,7 @@ export function Dashboard() {
       fontSize: "12px",
       textAlign: "center",
     },
-  }; 
+  };
 
   const FormSchema = Yup.object().shape({
     documentName: Yup.string().required("Obrigatório"),
@@ -135,21 +136,21 @@ export function Dashboard() {
                       ...values,
                     };
                     setIsLoading(true);
-                   try {
-                    axios
-                    .post("http://localhost:3000/documents", data)
-                    .then(function () {
-                      setDocCounter(docCounter + 1);
-                      setTimeout(() => {
-                        setIsLoading(false);
-                        setDocuments(...documents, data);
-                        window.location.reload();
-                      }, 1000);
-                      openSuccessSnackbar("Documento criado com sucesso.")
-                    })
-                   } catch (e) {
-                    openErrorSnackbar("Houve um erro ao criar o documento!")
-                   }
+                    try {
+                      axios
+                        .post("http://localhost:3000/documents", data)
+                        .then(function () {
+                          setDocCounter(docCounter + 1);
+                          setTimeout(() => {
+                            setIsLoading(false);
+                            setDocuments(...documents, data);
+                            window.location.reload();
+                          }, 1000);
+                          openSuccessSnackbar("Documento criado com sucesso.");
+                        });
+                    } catch (e) {
+                      openErrorSnackbar("Houve um erro ao criar o documento!");
+                    }
                   }}
                   validationSchema={FormSchema}
                 >
@@ -173,7 +174,9 @@ export function Dashboard() {
                         value={values.documentName}
                       />
                       {errors.documentName && touched.documentName ? (
-                        <div style={{color: "red"}}>{errors.documentName}</div>
+                        <div style={{ color: "red", fontSize: "14px" }}>
+                          {errors.documentName}
+                        </div>
                       ) : null}
                       <label style={{ display: "flex" }} htmlFor="type">
                         Tipo do Documento:
@@ -217,7 +220,7 @@ export function Dashboard() {
                         />
                       </div>
                       {errors.name && touched.name ? (
-                        <div style={{color: "red"}}>{errors.name}</div>
+                        <div style={{ color: "red", fontSize: "14px" }}>{errors.name}</div>
                       ) : null}
                       <h4>Dados do cartório</h4>
                       <div className="box-zipcode">
@@ -233,7 +236,7 @@ export function Dashboard() {
                         />
                       </div>
                       {errors.name && touched.name ? (
-                        <div style={{color: "red"}}>{errors.name}</div>
+                        <div style={{ color: "red", fontSize: "14px" }}>{errors.name}</div>
                       ) : null}
                       <div style={{ display: "flex" }}>
                         <div className="box-street">
@@ -261,7 +264,7 @@ export function Dashboard() {
                             value={values.number}
                           />
                           {errors.number && touched.number ? (
-                            <div style={{color: "red"}}>{errors.number}</div>
+                            <div style={{ color: "red", fontSize: "14px" }}>{errors.number}</div>
                           ) : null}
                         </div>
                       </div>
@@ -301,9 +304,16 @@ export function Dashboard() {
             </div>
             <div className="tickets-area">
               <h2 style={{ marginTop: "10px" }}>
-                {docCounter === 1
-                  ? `${docCounter} documento solicitado`
-                  : `${docCounter} documentos solicitados`}
+                {docCounter === 0 ? (
+                  <div className="empty-docs">
+                    <div style={{display: "flex", alignItems: "center", flexDirection: "column"}}>
+                      <img src={emptyImg} alt="Nenhum documento criado" />
+                      <p>Nenhum documento criado</p>
+                    </div>
+                  </div>
+                ) : (
+                  `${docCounter} documentos criados`
+                )}
               </h2>
               <div className="tickets">
                 {isLoading ? (
