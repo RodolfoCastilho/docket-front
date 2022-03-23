@@ -23,6 +23,8 @@ Faça o clone do projeto
 
 Rode a API
 ```bash
+  npm install -g json-server
+  
   npm run server
 ```
 Rode o projeto web
