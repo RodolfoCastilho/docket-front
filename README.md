@@ -18,7 +18,7 @@ Faça o clone do projeto
 ```bash
   git clone https://github.com/RodolfoCastilho/docket-front
   cd docket-front
-  npm i
+  npm i -f
 ```
 
 Rode a API
