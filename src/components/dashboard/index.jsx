@@ -1,5 +1,5 @@
 import { Formik } from "formik";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { findCEP } from "../../services/api";
 import { useSnackbar } from "react-simple-snackbar";
 import { IMaskInput } from "react-imask";
@@ -34,7 +34,8 @@ export function Dashboard() {
 
   const FormSchema = Yup.object().shape({
     documentName: Yup.string().required("Obrigatório"),
-    type: Yup.string().required("Obrigatório"),
+    documentValue: Yup.string().required("Obrigatório"),
+    name: Yup.string().required("Obrigatório"),
     zipCode: Yup.number().required("Obrigatório"),
     number: Yup.number().required("Obrigatório"),
   });
@@ -161,7 +162,6 @@ export function Dashboard() {
                     handleChange,
                     handleBlur,
                     handleSubmit,
-                    isSubmitting,
                   }) => (
                     <form onSubmit={handleSubmit}>
                       <label htmlFor="documentName">Nome do documento:</label>
@@ -203,7 +203,13 @@ export function Dashboard() {
                         value={values.documentValue}
                         placeholder="Digite aqui"
                         onChange={handleChange}
+                        onBlur={handleBlur}
                       />
+                       {errors.documentValue && touched.documentValue ? (
+                        <div style={{ color: "red", fontSize: "14px" }}>
+                          {errors.documentValue}
+                        </div>
+                      ) : null}
                       <div className="box-name">
                         <label htmlFor="name">
                           {values.type === "person"
@@ -218,10 +224,10 @@ export function Dashboard() {
                           onBlur={handleBlur}
                           value={values.name}
                         />
-                      </div>
                       {errors.name && touched.name ? (
                         <div style={{ color: "red", fontSize: "14px" }}>{errors.name}</div>
                       ) : null}
+                      </div>
                       <h4>Dados do cartório</h4>
                       <div className="box-zipcode">
                         <label htmlFor="zipCode">CEP:</label>
@@ -234,10 +240,10 @@ export function Dashboard() {
                           onBlur={handleFindZipCode}
                           value={values.zipCode}
                         />
-                      </div>
-                      {errors.name && touched.name ? (
-                        <div style={{ color: "red", fontSize: "14px" }}>{errors.name}</div>
+                      {errors.zipCode && touched.zipCode ? (
+                        <div style={{ color: "red", fontSize: "14px" }}>{errors.zipCode}</div>
                       ) : null}
+                      </div>
                       <div style={{ display: "flex" }}>
                         <div className="box-street">
                           <label htmlFor="street">Rua:</label>
